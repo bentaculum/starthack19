@@ -1,0 +1,15 @@
+- use a combo of car data and health, then have some prescriptive measures
+
+Presciptive measures should be easy, don't spend much time on that.
+
+
+AA: Define a target function first
+
+There is a car simulator (there is half an hour of driving data available)?
++ a real car available, for testing and generating data
+
+Real time car sharing service, based on measurements from the car, 
+
+Data access car:
+- Stream real time, access past data from ftp server
+- 
