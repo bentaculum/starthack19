@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
 
 /**
  * Generated class for the InfoPage page.
@@ -15,7 +16,32 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class InfoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  data: any;
+  mode: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
+    let page = this.navParams.get('page');
+    this.mode = page;
+    if(page === "find_driver"){
+      let params = this.navParams.get('params');
+      this.waitForDriver(params);
+    }
+  }
+
+  waitForDriver(params){
+    this.restProvider.findDriver(params.latitude, params.longitude).then(
+      data => {
+        this.data = data;
+        if(data.is_match){
+          this.page = "driver_found";
+        }
+        else{
+          console.log("WAIT FOR DRIVER BEAT");
+          setTimeout(() => {
+            this.waitForDriver(params);
+          }, 2000);
+        }
+    })
   }
 
   ionViewDidLoad() {
