@@ -1,14 +1,28 @@
 import requests
 import json
 
+from csv_streaming import load_csvs, stream_to_csv
+from config import config
 from flask import Flask
-from flask_ngrok import run_with_ngrok
+import pandas as pd
+import os
+import glob
+import numpy as np
+import time
+import csv
 
 
 def create_app():
     app = Flask(__name__)
     def run_on_start(*args, **argv):
-       print("hey") # csv magic
+        # absolut base_dir
+        base_dir = config['base_dir']
+        os.chdir(base_dir)
+        golden_table = load_csvs(os.path.join(base_dir, config['car_subdir']),
+                                 os.path.join(base_dir, config['watch_subdir']))
+        print('shape of golden table: {}'.format(golden_table.shape))
+        stream_to_csv(golden_table, os.path.join(base_dir, config['tmp_subdir']), config['stream_filename'])
+
     run_on_start()
     return app
 app = create_app()
@@ -88,6 +102,8 @@ url = "http://130.82.239.210"
 #         return False
 #     else:
 #         return True
+
+
 
 if __name__ == "__main__":
     app.run()
