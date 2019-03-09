@@ -8,8 +8,34 @@ AA: Define a target function first
 There is a car simulator (there is half an hour of driving data available)?
 + a real car available, for testing and generating data
 
-Real time car sharing service, based on measurements from the car, 
+
+
+
+
+Real time ride sharing service, based on measurements from the car, 
 
 Data access car:
 - Stream real time, access past data from ftp server
+- 
+
+Tinder for Uber with dynamic, automatically created profile based on sensor data
+Easy solution: 
+
+
+- Put a button on your steering tablet that activates if you want to take a ride.
+Base case: Maybe, use the algorithm
+NO: under no circumstances will I take someone now
+
+
+
+
+
+Additional data for "is ride possible?":
+- Traffic from Google Maps
+- Calendar data
+
+
+
+Additional Data for matching:
+- Music (Spotify API) or any other entertainment data
 - 
