@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'driver.html',
 })
 export class DriverPage {
+  is_online: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

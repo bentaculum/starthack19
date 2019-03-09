@@ -1,3 +1,13 @@
-<ion-content padding>
-
+<ion-content>
+    <div class="banner">
+      <img src="assets/imgs/switch_white.png" style="width:50px;margin-top:30px" /><br />
+      <h1 style="color:white;margin-top:30px;display:inline-block">Passenger</h1><br />
+      <h3 style="color:white;display:inline-block">Enter your destination</h3>
+      <div class="select-box">
+        <ion-item style="padding-right: 16px;">
+        <ion-input type="text" (click)="showAddressModal()" [(ngModel)]="address.place" placeholder="Pick an address"></ion-input>
+        </ion-item>
+        <button ion-button round style="width:175px" [disabled]="!show_button">Find me a ride</button>
+      </div>
+    </div>
 </ion-content>
