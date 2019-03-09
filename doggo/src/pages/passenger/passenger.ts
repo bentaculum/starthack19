@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import {AutocompletePage} from '../autocomplete/autocomplete';
+import { InfoPage } from '../info/info';
 
 /**
  * Generated class for the PassengerPage page.
@@ -33,6 +34,13 @@ export class PassengerPage {
       }
     });
     modal.present();
+  }
+
+  findingRider() {
+    this.navCtrl.push(InfoPage, {
+      'page': 'find_driver',
+      'params': this.address
+    })
   }
 
 }
