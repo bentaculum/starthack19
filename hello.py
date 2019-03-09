@@ -44,6 +44,7 @@ app = create_app()
 def driver_ready():
     data = pd.read_csv(os.path.join(config['base_dir'],config['tmp_subdir'],config['stream_filename']))
     # print(data.shape)
+    # print('cap {} rev {} speed {} hr {} sweatbleh {}'.format(has_capacity(data), calm_driving(data), smooth_speed(data), heart_rate_ok(data), no_sweating(data)))
     if has_capacity(data) and calm_driving(data) and smooth_speed(data) and heart_rate_ok(data) and no_sweating(data):
         return "True"
     else:
@@ -53,7 +54,7 @@ def driver_ready():
 # HELPER FUNCTIONS BELOW
 
 # determines whether the driver is not excessively sweating
-def no_sweating(data, threshold=1, context_window=60, attr='EDA_0'):
+def no_sweating(data, threshold=0.5, context_window=60, attr='EDA_0'):
     context = data[attr].iloc[-context_window:]
     max = context.max()
     # print(max)
@@ -64,7 +65,7 @@ def no_sweating(data, threshold=1, context_window=60, attr='EDA_0'):
 
 
 # determines whether the heart rate is in acceptable range
-def heart_rate_ok(data, threshold=60, context_window=60, attr='HR_0'):
+def heart_rate_ok(data, threshold=100, context_window=60, attr='HR_0'):
     context = data[attr].iloc[-context_window:]
     avg = np.average(context)
     if avg > threshold:
@@ -90,7 +91,7 @@ def has_capacity(data):
 
 
 # determines whether speed deviates by more than arbitrary threshold
-def smooth_speed(data, threshold=30, context_window=60, attr='can0_ESP_v_Signal [Unit_KiloMeterPerHour]'):
+def smooth_speed(data, threshold=10, context_window=60, attr='can0_ESP_v_Signal [Unit_KiloMeterPerHour]'):
     context = data[attr].iloc[-context_window:]
     stdv = np.std(context)
     if stdv > threshold:
