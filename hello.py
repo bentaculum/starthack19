@@ -10,10 +10,16 @@ import glob
 import numpy as np
 import time
 import csv
+import threading
 
+dataLock = threading.Lock()
+# thread handler
+yourThread = threading.Thread()
 
 def create_app():
+    global yourThread
     app = Flask(__name__)
+
     def run_on_start(*args, **argv):
         # absolut base_dir
         base_dir = config['base_dir']
@@ -23,8 +29,12 @@ def create_app():
         print('shape of golden table: {}'.format(golden_table.shape))
         stream_to_csv(golden_table, os.path.join(base_dir, config['tmp_subdir']), config['stream_filename'])
 
-    run_on_start()
+    # run streaming in background thread, visible in global context
+    yourThread = threading.Thread(target=run_on_start)
+    yourThread.start()
+
     return app
+
 app = create_app()
 
 
