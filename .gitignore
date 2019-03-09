@@ -1,3 +1,9 @@
 *.DS_Store
 docs/*
 data/*
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/starthack19.iml
+.idea/vcs.xml
+.idea/workspace.xml
