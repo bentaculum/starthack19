@@ -27,8 +27,10 @@ export class PassengerPage {
   showAddressModal(){
     let modal = this.modalCtrl.create(AutocompletePage);
     modal.onDidDismiss(data => {
-      this.address = data;
-      this.show_button = true;
+      if(data && 'place' in data){
+        this.address = data;
+        this.show_button = true;
+      }
     });
     modal.present();
   }
