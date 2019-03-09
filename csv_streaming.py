@@ -126,6 +126,7 @@ def stream_to_csv(df, csv_path, csv_name, update_interval=1):
             writer = csv.writer(f)
             #             print(df.iloc[counter,:].values.tolist())
             writer.writerow(df.iloc[counter, :].values.tolist())
+        # print('received row {}'.format(counter))
         time.sleep(update_interval)
         counter += 1
     print('stream ended')
