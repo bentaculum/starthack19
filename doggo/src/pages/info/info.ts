@@ -32,7 +32,7 @@ export class InfoPage {
     this.restProvider.findDriver(params.latitude, params.longitude).then(
       data => {
         this.data = data;
-        if(data.is_match){
+        if(data && data.is_match){
           this.page = "driver_found";
         }
         else{
