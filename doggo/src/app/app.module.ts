@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+
+import { AutocompletePage } from '../pages/autocomplete/autocomplete';
 import { PassengerPage } from '../pages/passenger/passenger';
 import { DriverPage } from '../pages/driver/driver';
 import { ConfirmPage } from '../pages/confirm/confirm';
@@ -15,6 +17,7 @@ import { InfoPage } from '../pages/info/info';
   declarations: [
     MyApp,
     HomePage,
+    AutocompletePage,
     PassengerPage,
     DriverPage,
     ConfirmPage,
@@ -28,6 +31,7 @@ import { InfoPage } from '../pages/info/info';
   entryComponents: [
     MyApp,
     HomePage,
+    AutocompletePage,
     PassengerPage,
     DriverPage,
     ConfirmPage,

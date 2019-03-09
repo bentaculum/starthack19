@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import {AutocompletePage} from '../autocomplete/autocomplete';
 
 /**
  * Generated class for the PassengerPage page.
@@ -14,12 +15,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'passenger.html',
 })
 export class PassengerPage {
+  address;
+  show_button: false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl:ModalController) {
+    this.address = {
+      place: ''
+    };
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PassengerPage');
+  showAddressModal(){
+    let modal = this.modalCtrl.create(AutocompletePage);
+    modal.onDidDismiss(data => {
+      this.address = data;
+      this.show_button = true;
+    });
+    modal.present();
   }
 
 }
