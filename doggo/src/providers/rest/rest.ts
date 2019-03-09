@@ -27,9 +27,20 @@ export class RestProvider {
     });
   }
 
-  waitForPassenger() {
+  isPassenger() {
     return new Promise(resolve => {
       this.http.get(this.base_api_url+'/is_passenger').subscribe(data => {
+        resolve(data);
+      },
+      err => {
+        console.log(err);
+      });
+    });
+  }
+
+  findDestination() {
+    return new Promise(resolve => {
+      this.http.get(this.base_api_url+'/wait_for_destination').subscribe(data => {
         resolve(data);
       },
       err => {

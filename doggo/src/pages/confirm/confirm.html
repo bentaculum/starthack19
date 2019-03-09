@@ -1,15 +1,28 @@
 <!--
-  Generated template for the ConfirmPage page.
+  Generated template for the InfoPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar>
-    <ion-title>confirm</ion-title>
-  </ion-navbar>
-</ion-header>
 
 <ion-content padding>
+
+  <div style="text-align:center" *ngIf="mode == 'pickup'">
+  <img src="assets/imgs/switch_blue.png" class="logo" />
+  <img src="assets/imgs/confirm_passenger.svg" class="illus" />
+  <h3>Would you like to pickup someone on your way?</h3>
+  <h6>Passenger is 6 minutes away from here</h6>
+  <button ion-button round color="danger" style="width:175px">No</button>
+  <button ion-button round color="success" style="width:175px" (click)="confirmPassenger()">Yes</button>
+  </div>
+
+  <div style="text-align:center" *ngIf="mode == 'destination'">
+  <img src="assets/imgs/switch_blue.png" class="logo" />
+  <img src="assets/imgs/confirm_passenger.svg" class="illus" />
+  <h3>Hey! Are you travelling to {{data}}</h3>
+  <button ion-button round color="danger" style="width:175px">No</button>
+  <button ion-button round color="success" style="width:175px" (click)="setDestination()">Yes</button>
+  </div>
+
 
 </ion-content>
