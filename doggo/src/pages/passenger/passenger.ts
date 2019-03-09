@@ -16,7 +16,7 @@ import {AutocompletePage} from '../autocomplete/autocomplete';
 })
 export class PassengerPage {
   address;
-  show_button: false;
+  show_button: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl:ModalController) {
     this.address = {
