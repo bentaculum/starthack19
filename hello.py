@@ -12,8 +12,6 @@ import numpy as np
 import time
 import csv
 import threading
-
-dataLock = threading.Lock()
 # thread handler
 yourThread = threading.Thread()
 
