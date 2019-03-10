@@ -32,8 +32,8 @@ export class InfoPage {
     this.restProvider.findDriver(params.latitude, params.longitude).then(
       data => {
         this.data = data;
-        if(data && data.is_match){
-          this.page = "driver_found";
+        if(data && 'is_match' in data && data['is_match']){
+          this.mode = "driver_found";
         }
         else{
           console.log("WAIT FOR DRIVER BEAT");

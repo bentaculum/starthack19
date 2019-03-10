@@ -31,9 +31,9 @@ export class DriverPage {
   waitForDestination(){
     this.restProvider.findDestination().then(
       data => {
-        if(data && 'place' in data && data.place){
+        if(data && 'place' in data && data['place']){
           this.navCtrl.push(ConfirmPage, {
-            'data': data.place,
+            'data': data['place'],
             'mode': 'destination'
           })
         }
@@ -49,7 +49,7 @@ export class DriverPage {
   waitForPassenger(){
     this.restProvider.isPassenger().then(
       data => {
-        if(data && 'success' in data && data.success){
+        if(data && 'success' in data && data['success']){
           this.navCtrl.push(ConfirmPage, {
             'mode': 'pickup'
           })
