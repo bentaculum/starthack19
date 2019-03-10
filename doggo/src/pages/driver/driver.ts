@@ -31,7 +31,7 @@ export class DriverPage {
   waitForDestination(){
     this.restProvider.findDestination().then(
       data => {
-        if(data && data.place){
+        if(data && 'place' in data && data.place){
           this.navCtrl.push(ConfirmPage, {
             'data': data.place,
             'mode': 'destination'
@@ -40,7 +40,7 @@ export class DriverPage {
         else{
           console.log("WAIT FOR DESTINATION BEAT");
           setTimeout(() => {
-            this.waitForDestination(params);
+            this.waitForDestination();
           }, 2000);
         }
     })
@@ -49,7 +49,7 @@ export class DriverPage {
   waitForPassenger(){
     this.restProvider.isPassenger().then(
       data => {
-        if(data && data.success){
+        if(data && 'success' in data && data.success){
           this.navCtrl.push(ConfirmPage, {
             'mode': 'pickup'
           })
@@ -57,7 +57,7 @@ export class DriverPage {
         else{
           console.log("WAIT FOR PASSENGER BEAT");
           setTimeout(() => {
-            this.waitForDestination(params);
+            this.waitForPassenger();
           }, 2000);
         }
     })

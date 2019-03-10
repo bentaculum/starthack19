@@ -3,7 +3,8 @@ import json
 
 from csv_streaming import load_csvs, stream_to_csv
 from config import config
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pandas as pd
 import os
 import glob
@@ -19,7 +20,11 @@ yourThread = threading.Thread()
 def create_app():
     global yourThread
     app = Flask(__name__)
-
+    CORS(app)
+    # NOTE: this variable below only is for hackathon and demo version
+    # do not store data in variables in production
+    driver_accepted = False
+    passenger_requested = False
     def run_on_start(*args, **argv):
         # absolut base_dir
         base_dir = config['base_dir']
@@ -40,15 +45,45 @@ app = create_app()
 
 # url = "http://130.82.239.210"
 
-@app.route("/driver")
+@app.route("/find_driver")
+def find_driver():
+    # get lat and lng for passenger location and destination
+    #if driver_ready and driver_accepted:
+    if driver_accepted:
+        return jsonify({ 'is_match': True })
+    passenger_requested = True
+    return jsonify({ 'is_match': False })
+
+@app.route("/is_passenger")
+def is_passenger():
+    if passenger_requested:
+        # and if requested passenger destination
+        # lies on the driver's route
+        return jsonify({ 'success': True })
+    return jsonify({ 'success': False })
+
+@app.route("/wait_for_destination")
+def wait_for_destination():
+    # if we have data for given rider return place
+    # we think candidate is going to
+    return jsonify({ 'place': 'St Gallen, Switzerland' })
+
+@app.route("/reply_to_passenger")
+def reply_to_passenger():
+    reply = request.args.get('reply')
+    if reply == "yes":
+        driver_accepted = True
+        return jsonify({ 'success': True })
+    return jsonify({ 'success': False })
+
 def driver_ready():
     data = pd.read_csv(os.path.join(config['base_dir'],config['tmp_subdir'],config['stream_filename']))
     # print(data.shape)
     # print('cap {} rev {} speed {} hr {} sweatbleh {}'.format(has_capacity(data), calm_driving(data), smooth_speed(data), heart_rate_ok(data), no_sweating(data)))
     if has_capacity(data) and calm_driving(data) and smooth_speed(data) and heart_rate_ok(data) and no_sweating(data):
-        return "True"
+        return True
     else:
-        return "False"
+        return False
 
 
 # HELPER FUNCTIONS BELOW
