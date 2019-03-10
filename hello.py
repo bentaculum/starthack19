@@ -21,6 +21,7 @@ def create_app():
     CORS(app)
     # NOTE: this variable below only is for hackathon and demo version
     # do not store data in variables in production
+    # in production this will be stored in db
     driver_accepted = False
     passenger_requested = False
     def run_on_start(*args, **argv):
